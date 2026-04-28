@@ -126,6 +126,38 @@
     "explanation": "Choice B is the best answer because it presents the most likely consequence if New had not begun using sewing machines. The text states that New gained new customers and that sewing machines allowed him to make bags more efficiently, or in less time than he could when sewing by hand. It’s reasonable to conclude that if New hadn’t reduced the time it took to make each bag by starting to use sewing machines, it would have been hard for him to keep up with the increased demand."
   },
   {
+    "id": 16,
+    "subject": "English",
+    "domain": "Information and Ideas",
+    "difficulty": 1,
+    "source": "Question Bank",
+    "question": "Ochre sea stars live in tidal pools along the shoreline of the Pacific Ocean. At night, they move to higher shore levels in search of prey. But scientists Corey Garza and Carlos Robles noticed that ochre sea stars stayed at lower levels at night after heavy rains. Garza and Robles hypothesized that a layer of fresh water formed by rainfall was a barrier to the sea stars. To test their hypothesis, the scientists did an experiment. They placed some sea stars in a climbable tank of seawater and other sea stars in a similar tank of seawater with a layer of fresh water on top. Then, the scientists watched the sea stars’ behavior at night.\n\nWhich finding from the experiment, if true, would most directly support Garza and Robles’s hypothesis?",
+    "choices": {
+      "A": "None of the sea stars climbed to the tops of the tanks, but sea stars in the tank with only seawater moved around the bottom of the tank more than sea stars in the other tank did.",
+      "B": "Sea stars in the tank with only seawater climbed to the top of the tank, but sea stars in the other tank stopped climbing just below the layer of fresh water.",
+      "C": "Both groups of sea stars climbed to the tops of the tanks, but sea stars in the tank with only seawater climbed more slowly than sea stars in the other tank did.",
+      "D": "Sea stars in the tank with only seawater mostly stayed near the bottom of the tank, but sea stars in the other tank climbed into the layer of fresh water."
+    },
+    "answer": "B",
+    "explanation": "Choice B is correct because it directly supports the hypothesis that a layer of fresh water acts as a barrier. If sea stars climb normally in seawater but stop just below the fresh water layer, it shows they avoid crossing it, confirming the barrier effect."
+  },
+  {
+    "id": 17,
+    "subject": "English",
+    "domain": "Information and Ideas",
+    "difficulty": 1,
+    "source": "Question Bank",
+    "question": "Ruth Asawa was an accomplished artist who worked in many art forms, including her unique tied-wire sculptures, but she was dedicated to more than the creation of art. Asawa also wanted to bring art to children in her hometown of San Francisco, California. To that end, in 1968 she cofounded the Alvarado School Arts Workshop, which brought works of art and artists into public schools, and in 1982 she helped found a San Francisco public arts high school, which was later named after her.\n\nWhich choice best states the main idea of the text?",
+    "choices": {
+      "A": "Asawa inspired many other artists to share their work with students in public schools.",
+      "B": "Asawa’s unique sculptures were appreciated more by local art communities than they were nationwide.",
+      "C": "Asawa’s interest in art education prompted her to create art programs for students in San Francisco.",
+      "D": "Asawa left a promising career as a sculptor to work as an art teacher in San Francisco schools."
+    },
+    "answer": "C",
+    "explanation": "Choice C is correct because the text focuses on Asawa’s efforts to promote art education by establishing programs for students, showing that her interest in education led to these initiatives."
+  },
+  {
     "id": 12,
     "subject": "English",
     "domain": "Craft and Structure",
