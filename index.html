@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAT Grind — Question Randomizer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0c10;
+      --surface: #13151c;
+      --border: #1f2230;
+      --accent: #c8f135;
+      --accent2: #5b8fff;
+      --text: #e8eaf0;
+      --muted: #5a5f7a;
+      --red: #ff4d6d;
+      --green: #39d98a;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 60px;
+    }
+
+    /* noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      width: 100%;
+      max-width: 720px;
+      padding: 40px 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .tagline {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* FILTERS */
+    .filters {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      min-width: 160px;
+    }
+
+    .filter-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+
+    select {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a5f7a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+      transition: border-color 0.2s;
+    }
+
+    select:focus { border-color: var(--accent); }
+
+    /* STATS BAR */
+    .stats-bar {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+    }
+
+    .stat-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .stat-dot.green { background: var(--green); }
+    .stat-dot.red { background: var(--red); }
+    .stat-dot.neutral { background: var(--muted); }
+
+    /* CARD */
+    .card {
+      width: 100%;
+      max-width: 720px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.15s;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-subject {
+      background: rgba(91, 143, 255, 0.12);
+      color: var(--accent2);
+      border: 1px solid rgba(91, 143, 255, 0.25);
+    }
+
+    .badge-domain {
+      background: rgba(200, 241, 53, 0.08);
+      color: var(--accent);
+      border: 1px solid rgba(200, 241, 53, 0.2);
+    }
+
+    .badge-source {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .difficulty-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .dot.filled { background: var(--accent); }
+
+    .question-text {
+      font-size: 18px;
+      line-height: 1.65;
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    /* CHOICES */
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .choice-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    }
+
+    .choice-btn:hover:not(:disabled) {
+      border-color: var(--accent2);
+      background: rgba(91, 143, 255, 0.06);
+      transform: translateX(3px);
+    }
+
+    .choice-btn:disabled { cursor: default; }
+
+    .choice-btn.correct {
+      border-color: var(--green);
+      background: rgba(57, 217, 138, 0.08);
+    }
+
+    .choice-btn.wrong {
+      border-color: var(--red);
+      background: rgba(255, 77, 109, 0.08);
+    }
+
+    .choice-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      min-width: 22px;
+      color: var(--muted);
+    }
+
+    .choice-btn.correct .choice-label { color: var(--green); }
+    .choice-btn.wrong .choice-label { color: var(--red); }
+
+    /* EXPLANATION */
+    .explanation {
+      background: rgba(200, 241, 53, 0.05);
+      border: 1px solid rgba(200, 241, 53, 0.15);
+      border-radius: 12px;
+      padding: 18px 20px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: #c0c4d6;
+      display: none;
+      margin-bottom: 24px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .explanation.show { display: block; }
+
+    .explanation strong {
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ACTIONS */
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0b0c10;
+    }
+
+    .btn-primary:hover { opacity: 0.9; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--muted);
+    }
+
+    /* EMPTY STATE */
+    .empty-state {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
+    .empty-state h2 { font-family: 'Syne', sans-serif; font-size: 22px; margin-bottom: 8px; }
+    .empty-state p { color: var(--muted); font-size: 14px; }
+
+    /* RESULT BADGE */
+    .result-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .result-badge.correct {
+      display: inline-block;
+      background: rgba(57, 217, 138, 0.1);
+      color: var(--green);
+      border: 1px solid rgba(57, 217, 138, 0.3);
+    }
+
+    .result-badge.wrong {
+      display: inline-block;
+      background: rgba(255, 77, 109, 0.1);
+      color: var(--red);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 22px 18px; }
+      .question-text { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SAT<span>Grind</span></div>
+  <div class="tagline">// random question bank — no cap</div>
+</header>
+
+<!-- FILTERS -->
+<div class="filters">
+  <div class="filter-group">
+    <span class="filter-label">Subject</span>
+    <select id="filterSubject">
+      <option value="all">All Subjects</option>
+      <option value="Math">Math</option>
+      <option value="English">English</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Domain</span>
+    <select id="filterDomain">
+      <option value="all">All Domains</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <span class="filter-label">Difficulty</span>
+    <select id="filterDifficulty">
+      <option value="all">All Levels</option>
+      <option value="1">Easy (1)</option>
+      <option value="2">Medium (2)</option>
+      <option value="3">Hard (3)</option>
+    </select>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-dot green"></span>
+    <span id="statCorrect">0</span> correct
+  </div>
+  <div class="stat">
+    <span class="stat-dot red"></span>
+    <span id="statWrong">0</span> wrong
+  </div>
+  <div class="stat">
+    <span class="stat-dot neutral"></span>
+    <span id="statTotal">0</span> seen
+  </div>
+</div>
+
+<!-- CARD -->
+<div class="card" id="questionCard">
+  <div class="card-meta">
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <span class="badge badge-subject" id="metaSubject">—</span>
+      <span class="badge badge-domain" id="metaDomain">—</span>
+      <span class="badge badge-source" id="metaSource">—</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <div class="difficulty-dots" id="metaDifficulty"></div>
+      <span class="result-badge" id="resultBadge"></span>
+    </div>
+  </div>
+
+  <div class="question-text" id="questionText">Loading question...</div>
+
+  <div class="choices" id="choicesContainer"></div>
+
+  <div class="explanation" id="explanation">
+    <strong>Explanation</strong>
+    <span id="explanationText"></span>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" id="nextBtn" onclick="loadQuestion()">Next Question →</button>
+    <button class="btn btn-ghost" onclick="resetStats()">Reset Stats</button>
+  </div>
+</div>
+
+<div class="empty-state" id="emptyState" style="display:none;">
+  <div class="emoji">🔍</div>
+  <h2>No questions found</h2>
+  <p>Try changing your filters — no questions match this combo.</p>
+</div>
+
+<script>
+  let questions = [];
+  let stats = { correct: 0, wrong: 0, total: 0 };
+  let answered = false;
+  let seenIds = new Set();
+
+  // Load questions from the JSON file (same folder)
+  async function loadQuestions() {
+    try {
+      const res = await fetch('./questions.json');
+      questions = await res.json();
+      populateDomains();
+      loadQuestion();
+    } catch (e) {
+      document.getElementById('questionText').textContent =
+        '⚠️ Could not load questions.json — make sure it is in the same folder as index.html.';
+    }
+  }
+
+  function populateDomains() {
+    const domainSelect = document.getElementById('filterDomain');
+    const domains = [...new Set(questions.map(q => q.domain))].sort();
+    domainSelect.innerHTML = '<option value="all">All Domains</option>';
+    domains.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d;
+      opt.textContent = d;
+      domainSelect.appendChild(opt);
+    });
+  }
+
+  function getFiltered() {
+    const subject = document.getElementById('filterSubject').value;
+    const domain = document.getElementById('filterDomain').value;
+    const difficulty = document.getElementById('filterDifficulty').value;
+
+    return questions.filter(q => {
+      if (subject !== 'all' && q.subject !== subject) return false;
+      if (domain !== 'all' && q.domain !== domain) return false;
+      if (difficulty !== 'all' && q.difficulty !== parseInt(difficulty)) return false;
+      return true;
+    });
+  }
+
+  function loadQuestion() {
+    answered = false;
+    const filtered = getFiltered();
+
+    if (filtered.length === 0) {
+      document.getElementById('questionCard').style.display = 'none';
+      document.getElementById('emptyState').style.display = 'block';
+      return;
+    }
+
+    document.getElementById('questionCard').style.display = 'block';
+    document.getElementById('emptyState').style.display = 'none';
+
+    // Avoid repeats until all seen
+    let pool = filtered.filter(q => !seenIds.has(q.id));
+    if (pool.length === 0) { seenIds.clear(); pool = filtered; }
+
+    const q = pool[Math.floor(Math.random() * pool.length)];
+    seenIds.add(q.id);
+
+    renderQuestion(q);
+  }
+
+  function renderQuestion(q) {
+    // Meta
+    document.getElementById('metaSubject').textContent = q.subject;
+    document.getElementById('metaDomain').textContent = q.domain;
+    document.getElementById('metaSource').textContent = q.source;
+
+    // Difficulty dots
+    const dotsEl = document.getElementById('metaDifficulty');
+    dotsEl.innerHTML = '';
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i <= q.difficulty ? ' filled' : '');
+      dotsEl.appendChild(dot);
+    }
+
+    // Question
+    document.getElementById('questionText').textContent = q.question;
+
+    // Choices
+    const container = document.getElementById('choicesContainer');
+    container.innerHTML = '';
+    Object.entries(q.choices).forEach(([letter, text]) => {
+      const btn = document.createElement('button');
+      btn.className = 'choice-btn';
+      btn.innerHTML = `<span class="choice-label">${letter}</span><span>${text}</span>`;
+      btn.onclick = () => selectAnswer(letter, q.answer, q.explanation);
+      container.appendChild(btn);
+    });
+
+    // Reset state
+    document.getElementById('explanation').classList.remove('show');
+    document.getElementById('explanationText').textContent = '';
+    const badge = document.getElementById('resultBadge');
+    badge.className = 'result-badge';
+    badge.textContent = '';
+  }
+
+  function selectAnswer(selected, correct, explanation) {
+    if (answered) return;
+    answered = true;
+
+    stats.total++;
+
+    const buttons = document.querySelectorAll('.choice-btn');
+    buttons.forEach(btn => {
+      btn.disabled = true;
+      const label = btn.querySelector('.choice-label').textContent;
+      if (label === correct) btn.classList.add('correct');
+      else if (label === selected) btn.classList.add('wrong');
+    });
+
+    const badge = document.getElementById('resultBadge');
+    if (selected === correct) {
+      stats.correct++;
+      badge.textContent = '✓ correct';
+      badge.className = 'result-badge correct';
+    } else {
+      stats.wrong++;
+      badge.textContent = '✗ wrong';
+      badge.className = 'result-badge wrong';
+    }
+
+    document.getElementById('explanationText').textContent = explanation;
+    document.getElementById('explanation').classList.add('show');
+
+    updateStats();
+  }
+
+  function updateStats() {
+    document.getElementById('statCorrect').textContent = stats.correct;
+    document.getElementById('statWrong').textContent = stats.wrong;
+    document.getElementById('statTotal').textContent = stats.total;
+  }
+
+  function resetStats() {
+    stats = { correct: 0, wrong: 0, total: 0 };
+    seenIds.clear();
+    updateStats();
+    loadQuestion();
+  }
+
+  // Re-filter when dropdowns change
+  document.getElementById('filterSubject').addEventListener('change', () => {
+    populateDomains(); // refresh domains
+    loadQuestion();
+  });
+  document.getElementById('filterDomain').addEventListener('change', loadQuestion);
+  document.getElementById('filterDifficulty').addEventListener('change', loadQuestion);
+
+  loadQuestions();
+</script>
+</body>
+</html>
