@@ -396,7 +396,21 @@
       </div>
       <div class="filter-group">
         <span class="filter-label">Domain</span>
-        <select id="filterDomain"><option value="all">All Domains</option></select>
+        <select id="filterDomain">
+          <option value="all">All Domains</option>
+          <optgroup label="── Math ──">
+            <option value="Algebra">Algebra</option>
+            <option value="Advanced Math">Advanced Math</option>
+            <option value="Problem-Solving and Data Analysis">Problem-Solving and Data Analysis</option>
+            <option value="Geometry and Trigonometry">Geometry and Trigonometry</option>
+          </optgroup>
+          <optgroup label="── English ──">
+            <option value="Information and Ideas">Information and Ideas</option>
+            <option value="Craft and Structure">Craft and Structure</option>
+            <option value="Expression of Ideas">Expression of Ideas</option>
+            <option value="Standard English Conventions">Standard English Conventions</option>
+          </optgroup>
+        </select>
       </div>
       <div class="filter-group">
         <span class="filter-label">Difficulty</span>
@@ -518,23 +532,13 @@
     try {
       const res = await fetch('./questions.json');
       questions = await res.json();
-      populateDomains();
       loadQuestion();
     } catch (e) {
       document.getElementById('questionText').textContent = '⚠️ Could not load questions.json — make sure it is in the same folder as index.html.';
     }
   }
 
-  function populateDomains() {
-    const sel = document.getElementById('filterDomain');
-    const domains = [...new Set(questions.map(q => q.domain))].sort();
-    sel.innerHTML = '<option value="all">All Domains</option>';
-    domains.forEach(d => {
-      const o = document.createElement('option');
-      o.value = d; o.textContent = d;
-      sel.appendChild(o);
-    });
-  }
+
 
   function getFiltered() {
     const subject = document.getElementById('filterSubject').value;
@@ -726,7 +730,7 @@
     if (tab === 'history') loadHistory();
   }
 
-  document.getElementById('filterSubject').addEventListener('change', () => { populateDomains(); loadQuestion(); });
+  document.getElementById('filterSubject').addEventListener('change', loadQuestion);
   document.getElementById('filterDomain').addEventListener('change', loadQuestion);
   document.getElementById('filterDifficulty').addEventListener('change', loadQuestion);
 </script>
