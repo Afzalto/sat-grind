@@ -19,6 +19,8 @@
       --muted: #5a5f7a;
       --red: #ff4d6d;
       --green: #39d98a;
+      --yellow: #f5c542;
+      --orange: #ff8c42;
     }
 
     body {
@@ -29,7 +31,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 16px 60px;
+      padding: 0 16px 80px;
     }
 
     body::before {
@@ -41,27 +43,17 @@
       z-index: 0;
     }
 
+    /* ── LOGIN ── */
     #loginPage {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      animation: fadeIn 0.4s ease;
+      position: fixed; inset: 0; background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; animation: fadeIn 0.4s ease;
     }
 
     .login-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 48px 40px;
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 48px 40px;
+      width: 100%; max-width: 400px; text-align: center;
     }
 
     .login-logo { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; margin-bottom: 6px; }
@@ -71,168 +63,141 @@
     .login-desc strong { color: var(--text); }
 
     .google-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 24px;
-      background: #fff;
-      color: #1a1a1a;
-      border: none;
-      border-radius: 12px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      width: 100%; padding: 14px 24px; background: #fff; color: #1a1a1a;
+      border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 500; cursor: pointer;
       transition: opacity 0.15s, transform 0.1s;
     }
-
     .google-btn:hover { opacity: 0.92; }
     .google-btn:active { transform: scale(0.98); }
     .google-icon { width: 20px; height: 20px; flex-shrink: 0; }
     .login-note { margin-top: 20px; font-size: 12px; color: var(--muted); }
 
+    /* ── APP ── */
     #app { display: none; width: 100%; align-items: center; flex-direction: column; }
     #app.visible { display: flex; }
 
     header {
-      width: 100%;
-      max-width: 720px;
-      padding: 32px 0 24px;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      width: 100%; max-width: 720px; padding: 32px 0 24px;
+      position: relative; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
     }
 
     .logo { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; }
     .logo span { color: var(--accent); }
-
     .user-info { display: flex; align-items: center; gap: 10px; }
-
     .user-avatar { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--border); object-fit: cover; }
     .user-name { font-size: 13px; color: var(--muted); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
     .sign-out-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      padding: 5px 10px;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: color 0.15s, border-color 0.15s;
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      font-family: 'DM Mono', monospace; font-size: 11px; padding: 5px 10px;
+      border-radius: 7px; cursor: pointer; transition: color 0.15s, border-color 0.15s;
     }
     .sign-out-btn:hover { color: var(--text); border-color: var(--muted); }
 
+    /* ── TABS ── */
     .tabs {
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      gap: 4px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 4px;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
+      width: 100%; max-width: 720px; display: flex; gap: 4px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 4px; margin-bottom: 20px;
+      position: relative; z-index: 1;
     }
 
     .tab {
-      flex: 1;
-      padding: 9px;
-      text-align: center;
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--muted);
-      cursor: pointer;
-      border-radius: 9px;
-      transition: background 0.15s, color 0.15s;
-      border: none;
-      background: transparent;
+      flex: 1; padding: 9px; text-align: center;
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted);
+      cursor: pointer; border-radius: 9px; transition: background 0.15s, color 0.15s;
+      border: none; background: transparent;
     }
-
     .tab.active { background: var(--bg); color: var(--text); }
 
-    .filters {
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
+    /* ── STREAK BANNER ── */
+    .streak-banner {
+      width: 100%; max-width: 720px;
+      background: linear-gradient(135deg, rgba(245,197,66,0.12), rgba(255,140,66,0.08));
+      border: 1px solid rgba(245,197,66,0.3);
+      border-radius: 14px; padding: 14px 20px;
+      display: none; align-items: center; gap: 12px;
+      margin-bottom: 16px; position: relative; z-index: 1;
+      animation: slideDown 0.4s ease;
+    }
+    .streak-banner.show { display: flex; }
+    .streak-emoji { font-size: 28px; }
+    .streak-text { flex: 1; }
+    .streak-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; color: var(--yellow); }
+    .streak-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── WEAK AREA ALERT ── */
+    .weak-alert {
+      width: 100%; max-width: 720px;
+      background: rgba(255,77,109,0.06);
+      border: 1px solid rgba(255,77,109,0.2);
+      border-radius: 14px; padding: 14px 20px;
+      display: none; align-items: center; gap: 12px;
+      margin-bottom: 16px; position: relative; z-index: 1;
+    }
+    .weak-alert.show { display: flex; }
+    .weak-alert-icon { font-size: 22px; }
+    .weak-alert-text { flex: 1; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .weak-alert-text strong { color: var(--red); display: block; margin-bottom: 2px; font-size: 14px; }
+    .weak-practice-btn {
+      background: rgba(255,77,109,0.15); border: 1px solid rgba(255,77,109,0.3);
+      color: var(--red); font-family: 'DM Mono', monospace; font-size: 11px;
+      padding: 6px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .weak-practice-btn:hover { background: rgba(255,77,109,0.25); }
+
+    /* ── FILTERS ── */
+    .filters {
+      width: 100%; max-width: 720px; display: flex; flex-wrap: wrap;
+      gap: 10px; margin-bottom: 20px; position: relative; z-index: 1;
+    }
     .filter-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 150px; }
     .filter-label { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
 
     select {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      outline: none;
-      cursor: pointer;
-      appearance: none;
+      background: var(--surface); border: 1px solid var(--border); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 10px 14px;
+      border-radius: 10px; outline: none; cursor: pointer; appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235a5f7a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 36px;
-      transition: border-color 0.2s;
+      background-repeat: no-repeat; background-position: right 12px center;
+      padding-right: 36px; transition: border-color 0.2s;
     }
     select:focus { border-color: var(--accent); }
 
+    /* ── STATS BAR ── */
     .stats-bar {
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
-      flex-wrap: wrap;
+      width: 100%; max-width: 720px; display: flex; gap: 10px;
+      margin-bottom: 20px; position: relative; z-index: 1; flex-wrap: wrap;
     }
 
     .stat {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      flex: 1;
-      min-width: 80px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'DM Mono', monospace; font-size: 12px; flex: 1; min-width: 80px;
     }
 
     .stat-dot { width: 8px; height: 8px; border-radius: 50%; }
     .stat-dot.green { background: var(--green); }
     .stat-dot.red { background: var(--red); }
     .stat-dot.neutral { background: var(--muted); }
-    .stat-dot.yellow { background: #f5c542; }
+    .stat-dot.yellow { background: var(--yellow); }
 
+    /* ── QUESTION CARD ── */
     .card {
-      width: 100%;
-      max-width: 720px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 32px;
-      position: relative;
-      z-index: 1;
+      width: 100%; max-width: 720px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 18px;
+      padding: 32px; position: relative; z-index: 1;
     }
 
     .card-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; flex-wrap: wrap; gap: 8px; }
@@ -246,25 +211,27 @@
     .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
     .dot.filled { background: var(--accent); }
 
+    /* BOOKMARK BTN */
+    .bookmark-btn {
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 8px; padding: 6px 10px; cursor: pointer;
+      font-size: 16px; transition: border-color 0.15s, background 0.15s;
+      line-height: 1;
+    }
+    .bookmark-btn:hover { border-color: var(--yellow); background: rgba(245,197,66,0.08); }
+    .bookmark-btn.bookmarked { border-color: var(--yellow); background: rgba(245,197,66,0.1); }
+
     .question-text { font-size: 18px; line-height: 1.65; margin-bottom: 28px; font-weight: 500; }
     .choices { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
 
     .choice-btn {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 18px;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      cursor: pointer;
-      text-align: left;
+      display: flex; align-items: center; gap: 14px;
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: 15px;
+      cursor: pointer; text-align: left;
       transition: border-color 0.15s, background 0.15s, transform 0.1s;
     }
-
     .choice-btn:hover:not(:disabled) { border-color: var(--accent2); background: rgba(91,143,255,0.06); transform: translateX(3px); }
     .choice-btn:disabled { cursor: default; }
     .choice-btn.correct { border-color: var(--green); background: rgba(57,217,138,0.08); }
@@ -275,23 +242,14 @@
     .choice-btn.wrong .choice-label { color: var(--red); }
 
     .explanation {
-      background: rgba(200,241,53,0.05);
-      border: 1px solid rgba(200,241,53,0.15);
-      border-radius: 12px;
-      padding: 18px 20px;
-      font-size: 14px;
-      line-height: 1.65;
-      color: #c0c4d6;
-      display: none;
-      margin-bottom: 24px;
-      animation: fadeIn 0.3s ease;
+      background: rgba(200,241,53,0.05); border: 1px solid rgba(200,241,53,0.15);
+      border-radius: 12px; padding: 18px 20px; font-size: 14px; line-height: 1.65;
+      color: #c0c4d6; display: none; margin-bottom: 24px; animation: fadeIn 0.3s ease;
     }
-
     .explanation.show { display: block; }
     .explanation strong { color: var(--accent); font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; }
 
     .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-
     .btn { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; padding: 12px 24px; border-radius: 10px; border: none; cursor: pointer; transition: transform 0.1s, opacity 0.15s; letter-spacing: 0.3px; }
     .btn:active { transform: scale(0.97); }
     .btn-primary { background: var(--accent); color: #0b0c10; }
@@ -303,46 +261,104 @@
     .result-badge.correct { display: inline-block; background: rgba(57,217,138,0.1); color: var(--green); border: 1px solid rgba(57,217,138,0.3); }
     .result-badge.wrong { display: inline-block; background: rgba(255,77,109,0.1); color: var(--red); border: 1px solid rgba(255,77,109,0.3); }
 
+    /* ── HISTORY TAB ── */
     #historyView { width: 100%; max-width: 720px; position: relative; z-index: 1; display: none; }
 
-    .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .history-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; }
-    .history-list { display: flex; flex-direction: column; gap: 10px; }
+    /* PROGRESS RING + STATS ROW */
+    .history-top {
+      display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+    }
 
+    .progress-ring-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px;
+      display: flex; align-items: center; gap: 20px; flex: 1; min-width: 200px;
+    }
+
+    .ring-wrap { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+    .ring-wrap svg { transform: rotate(-90deg); }
+    .ring-bg { fill: none; stroke: var(--border); stroke-width: 7; }
+    .ring-fill { fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; transition: stroke-dashoffset 0.8s ease; }
+    .ring-label {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .ring-pct { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--text); }
+    .ring-sub { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--muted); text-transform: uppercase; }
+
+    .ring-stats { display: flex; flex-direction: column; gap: 6px; }
+    .ring-stat { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
+    .ring-stat span { color: var(--text); font-weight: 500; }
+
+    /* WEAK AREA CARD */
+    .weak-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 18px; padding: 24px; flex: 1; min-width: 200px;
+    }
+    .weak-card-title { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 14px; }
+    .weak-domain { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .weak-rank { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); min-width: 16px; }
+    .weak-name { font-size: 13px; flex: 1; }
+    .weak-pct-bad { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--red); }
+    .weak-pct-ok { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--green); }
+
+    /* BREAKDOWN */
+    .breakdown { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; margin-bottom: 16px; display: none; }
+    .breakdown-title { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 16px; }
+    .breakdown-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .breakdown-domain { font-size: 13px; min-width: 200px; color: var(--text); }
+    .breakdown-bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+    .breakdown-bar-fill { height: 100%; border-radius: 99px; transition: width 0.6s ease; }
+    .breakdown-pct { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); min-width: 36px; text-align: right; }
+
+    /* BOOKMARKS TAB */
+    #bookmarksView { width: 100%; max-width: 720px; position: relative; z-index: 1; display: none; }
+    .bookmarks-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .bookmark-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 18px 20px;
+    }
+    .bookmark-q { font-size: 14px; color: var(--text); margin-bottom: 10px; line-height: 1.55; }
+    .bookmark-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .bookmark-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+    .bookmark-badge { font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 5px; color: var(--muted); border: 1px solid var(--border); }
+    .unbookmark-btn {
+      font-family: 'DM Mono', monospace; font-size: 11px; color: var(--red);
+      background: transparent; border: 1px solid rgba(255,77,109,0.3);
+      padding: 4px 10px; border-radius: 7px; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .unbookmark-btn:hover { background: rgba(255,77,109,0.08); }
+
+    /* HISTORY LIST */
+    .history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; margin-top: 4px; }
+    .history-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; }
+    .history-list { display: flex; flex-direction: column; gap: 10px; }
     .history-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; display: flex; gap: 14px; align-items: flex-start; }
     .history-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
     .history-icon.correct { background: rgba(57,217,138,0.1); color: var(--green); }
     .history-icon.wrong { background: rgba(255,77,109,0.1); color: var(--red); }
-
     .history-body { flex: 1; min-width: 0; }
     .history-q { font-size: 13px; color: var(--text); margin-bottom: 6px; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .history-meta { display: flex; gap: 8px; flex-wrap: wrap; }
     .history-badge { font-family: 'DM Mono', monospace; font-size: 10px; padding: 2px 8px; border-radius: 5px; color: var(--muted); border: 1px solid var(--border); }
     .history-time { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--muted); white-space: nowrap; }
 
-    .breakdown { width: 100%; max-width: 720px; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 24px; margin-bottom: 16px; position: relative; z-index: 1; display: none; }
-    .breakdown-title { font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 16px; }
-    .breakdown-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .breakdown-domain { font-size: 13px; min-width: 160px; color: var(--text); }
-    .breakdown-bar-bg { flex: 1; height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
-    .breakdown-bar-fill { height: 100%; border-radius: 99px; background: var(--accent); transition: width 0.6s ease; }
-    .breakdown-pct { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); min-width: 36px; text-align: right; }
-
     .empty-state { width: 100%; max-width: 720px; text-align: center; padding: 60px 20px; position: relative; z-index: 1; }
     .empty-state .emoji { font-size: 48px; margin-bottom: 16px; }
     .empty-state h2 { font-family: 'Syne', sans-serif; font-size: 22px; margin-bottom: 8px; }
     .empty-state p { color: var(--muted); font-size: 14px; }
-
     .empty-history { text-align: center; padding: 60px 20px; color: var(--muted); }
     .empty-history .emoji { font-size: 40px; margin-bottom: 12px; }
     .empty-history p { font-size: 14px; }
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
     @media (max-width: 480px) {
       .card { padding: 20px 16px; }
       .question-text { font-size: 15px; }
       .login-card { padding: 36px 24px; }
+      .breakdown-domain { min-width: 140px; }
     }
   </style>
 </head>
@@ -381,10 +397,31 @@
   <div class="tabs">
     <button class="tab active" id="tabPractice" onclick="switchTab('practice')">Practice</button>
     <button class="tab" id="tabHistory" onclick="switchTab('history')">History</button>
+    <button class="tab" id="tabBookmarks" onclick="switchTab('bookmarks')">Bookmarks 🔖</button>
   </div>
 
-  <!-- PRACTICE -->
+  <!-- PRACTICE VIEW -->
   <div id="practiceView" style="width:100%;display:flex;flex-direction:column;align-items:center;">
+
+    <!-- STREAK BANNER -->
+    <div class="streak-banner" id="streakBanner">
+      <div class="streak-emoji">🔥</div>
+      <div class="streak-text">
+        <div class="streak-title" id="streakTitle">5 in a row!</div>
+        <div class="streak-sub">You're on fire. Keep it going.</div>
+      </div>
+    </div>
+
+    <!-- WEAK AREA ALERT -->
+    <div class="weak-alert" id="weakAlert">
+      <div class="weak-alert-icon">⚠️</div>
+      <div class="weak-alert-text">
+        <strong id="weakAlertTitle">Weak area detected</strong>
+        <span id="weakAlertSub">You're struggling here based on your last answers.</span>
+      </div>
+      <button class="weak-practice-btn" id="weakPracticeBtn">Practice this →</button>
+    </div>
+
     <div class="filters">
       <div class="filter-group">
         <span class="filter-label">Subject</span>
@@ -416,9 +453,9 @@
         <span class="filter-label">Difficulty</span>
         <select id="filterDifficulty">
           <option value="all">All Levels</option>
-          <option value="1">Easy (1)</option>
-          <option value="2">Medium (2)</option>
-          <option value="3">Hard (3)</option>
+          <option value="1">Easy</option>
+          <option value="2">Medium</option>
+          <option value="3">Hard</option>
         </select>
       </div>
     </div>
@@ -437,8 +474,9 @@
           <span class="badge badge-domain" id="metaDomain">—</span>
           <span class="badge badge-source" id="metaSource">—</span>
         </div>
-        <div style="display:flex;align-items:center;gap:12px;">
+        <div style="display:flex;align-items:center;gap:10px;">
           <div class="difficulty-dots" id="metaDifficulty"></div>
+          <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="Bookmark this question">🔖</button>
           <span class="result-badge" id="resultBadge"></span>
         </div>
       </div>
@@ -464,16 +502,53 @@
     </div>
   </div>
 
-  <!-- HISTORY -->
+  <!-- HISTORY VIEW -->
   <div id="historyView">
+    <div class="history-top">
+      <!-- PROGRESS RING -->
+      <div class="progress-ring-card">
+        <div class="ring-wrap">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle class="ring-bg" cx="40" cy="40" r="33"/>
+            <circle class="ring-fill" id="ringFill" cx="40" cy="40" r="33"
+              stroke-dasharray="207.3" stroke-dashoffset="207.3"/>
+          </svg>
+          <div class="ring-label">
+            <div class="ring-pct" id="ringPct">0%</div>
+            <div class="ring-sub">accuracy</div>
+          </div>
+        </div>
+        <div class="ring-stats">
+          <div class="ring-stat">Total answered: <span id="ringTotal">0</span></div>
+          <div class="ring-stat">Correct: <span id="ringCorrect" style="color:var(--green)">0</span></div>
+          <div class="ring-stat">Wrong: <span id="ringWrong" style="color:var(--red)">0</span></div>
+        </div>
+      </div>
+
+      <!-- WEAK AREAS -->
+      <div class="weak-card">
+        <div class="weak-card-title">⚠️ Weakest Areas</div>
+        <div id="weakDomainList"><div class="empty-history"><p style="font-size:12px;">Answer more questions to see weak areas</p></div></div>
+      </div>
+    </div>
+
     <div class="breakdown" id="breakdownCard">
       <div class="breakdown-title">Accuracy by Domain</div>
       <div id="breakdownRows"></div>
     </div>
+
     <div class="history-header">
       <div class="history-title">Recent Activity</div>
     </div>
     <div class="history-list" id="historyList"></div>
+  </div>
+
+  <!-- BOOKMARKS VIEW -->
+  <div id="bookmarksView">
+    <div class="history-header">
+      <div class="history-title">Bookmarked Questions 🔖</div>
+    </div>
+    <div class="bookmarks-list" id="bookmarksList"></div>
   </div>
 </div>
 
@@ -488,8 +563,11 @@
   let session = { correct: 0, wrong: 0, total: 0, streak: 0 };
   let answered = false;
   let seenIds = new Set();
+  let currentQuestion = null;
+  let bookmarks = new Set(); // set of question IDs
+  let recentAnswers = []; // last 10 answers for weak area detection
 
-  // AUTH
+  // ── AUTH ──
   async function signInWithGoogle() {
     await sb.auth.signInWithOAuth({
       provider: 'google',
@@ -525,20 +603,19 @@
     if (avatar) document.getElementById('userAvatar').src = avatar;
     else document.getElementById('userAvatar').style.display = 'none';
     loadQuestionsFile();
+    loadBookmarks();
   }
 
-  // QUESTIONS
+  // ── QUESTIONS ──
   async function loadQuestionsFile() {
     try {
       const res = await fetch('./questions.json');
       questions = await res.json();
       loadQuestion();
     } catch (e) {
-      document.getElementById('questionText').textContent = '⚠️ Could not load questions.json — make sure it is in the same folder as index.html.';
+      document.getElementById('questionText').textContent = '⚠️ Could not load questions.json.';
     }
   }
-
-
 
   function getFiltered() {
     const subject = document.getElementById('filterSubject').value;
@@ -554,18 +631,24 @@
 
   function loadQuestion() {
     answered = false;
+    currentQuestion = null;
     const filtered = getFiltered();
+
     if (filtered.length === 0) {
       document.getElementById('questionCard').style.display = 'none';
       document.getElementById('emptyState').style.display = 'block';
       return;
     }
+
     document.getElementById('questionCard').style.display = 'block';
     document.getElementById('emptyState').style.display = 'none';
+
     let pool = filtered.filter(q => !seenIds.has(q.id));
     if (pool.length === 0) { seenIds.clear(); pool = filtered; }
+
     const q = pool[Math.floor(Math.random() * pool.length)];
     seenIds.add(q.id);
+    currentQuestion = q;
     renderQuestion(q);
   }
 
@@ -599,6 +682,13 @@
     const badge = document.getElementById('resultBadge');
     badge.className = 'result-badge';
     badge.textContent = '';
+
+    // Update bookmark button state
+    const bookmarkBtn = document.getElementById('bookmarkBtn');
+    bookmarkBtn.classList.toggle('bookmarked', bookmarks.has(q.id));
+
+    // Hide banners on new question
+    document.getElementById('streakBanner').classList.remove('show');
   }
 
   async function selectAnswer(selected, q) {
@@ -609,6 +699,10 @@
     session.total++;
     if (isCorrect) { session.correct++; session.streak++; }
     else { session.wrong++; session.streak = 0; }
+
+    // Track recent answers for weak area detection
+    recentAnswers.push({ domain: q.domain, correct: isCorrect });
+    if (recentAnswers.length > 20) recentAnswers.shift();
 
     document.querySelectorAll('.choice-btn').forEach(btn => {
       btn.disabled = true;
@@ -624,6 +718,14 @@
     document.getElementById('explanationText').textContent = q.explanation;
     document.getElementById('explanation').classList.add('show');
     updateStatsUI();
+
+    // Show streak banner at milestones
+    if (isCorrect && session.streak > 0 && session.streak % 5 === 0) {
+      showStreakBanner(session.streak);
+    }
+
+    // Check weak areas after every 5 answers
+    if (session.total % 5 === 0) detectWeakArea();
 
     // Save to Supabase
     if (currentUser) {
@@ -651,12 +753,144 @@
 
   function resetSession() {
     session = { correct: 0, wrong: 0, total: 0, streak: 0 };
+    recentAnswers = [];
     seenIds.clear();
     updateStatsUI();
+    document.getElementById('streakBanner').classList.remove('show');
+    document.getElementById('weakAlert').classList.remove('show');
     loadQuestion();
   }
 
-  // HISTORY
+  // ── STREAK BANNER ──
+  function showStreakBanner(streak) {
+    document.getElementById('streakTitle').textContent = `${streak} in a row!`;
+    document.getElementById('streakBanner').classList.add('show');
+    setTimeout(() => document.getElementById('streakBanner').classList.remove('show'), 4000);
+  }
+
+  // ── WEAK AREA DETECTION ──
+  function detectWeakArea() {
+    if (recentAnswers.length < 5) return;
+
+    const domainStats = {};
+    recentAnswers.forEach(a => {
+      if (!domainStats[a.domain]) domainStats[a.domain] = { correct: 0, total: 0 };
+      domainStats[a.domain].total++;
+      if (a.correct) domainStats[a.domain].correct++;
+    });
+
+    // Find domain with lowest accuracy (min 2 attempts)
+    let worstDomain = null;
+    let worstPct = 100;
+
+    Object.entries(domainStats).forEach(([domain, s]) => {
+      if (s.total >= 2) {
+        const pct = (s.correct / s.total) * 100;
+        if (pct < worstPct) { worstPct = pct; worstDomain = domain; }
+      }
+    });
+
+    if (worstDomain && worstPct < 60) {
+      document.getElementById('weakAlertTitle').textContent = `Weak area: ${worstDomain}`;
+      document.getElementById('weakAlertSub').textContent = `You're getting ${Math.round(worstPct)}% correct here recently. Focus on this!`;
+      document.getElementById('weakPracticeBtn').onclick = () => {
+        document.getElementById('filterDomain').value = worstDomain;
+        document.getElementById('weakAlert').classList.remove('show');
+        loadQuestion();
+      };
+      document.getElementById('weakAlert').classList.add('show');
+    } else {
+      document.getElementById('weakAlert').classList.remove('show');
+    }
+  }
+
+  // ── BOOKMARKS ──
+  async function loadBookmarks() {
+    if (!currentUser) return;
+    const { data } = await sb
+      .from('bookmarks')
+      .select('question_id')
+      .eq('user_id', currentUser.id);
+    if (data) data.forEach(b => bookmarks.add(b.question_id));
+  }
+
+  async function toggleBookmark() {
+    if (!currentQuestion) return;
+    const qid = currentQuestion.id;
+    const btn = document.getElementById('bookmarkBtn');
+
+    if (bookmarks.has(qid)) {
+      bookmarks.delete(qid);
+      btn.classList.remove('bookmarked');
+      if (currentUser) {
+        await sb.from('bookmarks').delete()
+          .eq('user_id', currentUser.id)
+          .eq('question_id', qid);
+      }
+    } else {
+      bookmarks.add(qid);
+      btn.classList.add('bookmarked');
+      if (currentUser) {
+        await sb.from('bookmarks').insert({
+          user_id: currentUser.id,
+          question_id: qid,
+          question_text: currentQuestion.question,
+          subject: currentQuestion.subject,
+          domain: currentQuestion.domain,
+          difficulty: currentQuestion.difficulty,
+          answer: currentQuestion.answer,
+          explanation: currentQuestion.explanation,
+          bookmarked_at: new Date().toISOString()
+        });
+      }
+    }
+  }
+
+  async function loadBookmarksView() {
+    if (!currentUser) return;
+    const { data } = await sb
+      .from('bookmarks')
+      .select('*')
+      .eq('user_id', currentUser.id)
+      .order('bookmarked_at', { ascending: false });
+
+    const list = document.getElementById('bookmarksList');
+    if (!data || data.length === 0) {
+      list.innerHTML = '<div class="empty-history"><div class="emoji">🔖</div><p>No bookmarks yet.<br/>Tap the 🔖 on any question to save it.</p></div>';
+      return;
+    }
+
+    list.innerHTML = data.map(b => `
+      <div class="bookmark-item" id="bm-${b.question_id}">
+        <div class="bookmark-q">${b.question_text}</div>
+        <div class="bookmark-footer">
+          <div class="bookmark-meta">
+            <span class="bookmark-badge">${b.subject}</span>
+            <span class="bookmark-badge">${b.domain}</span>
+            <span class="bookmark-badge">${['','Easy','Medium','Hard'][b.difficulty] || b.difficulty}</span>
+            <span class="bookmark-badge">Answer: ${b.answer}</span>
+          </div>
+          <button class="unbookmark-btn" onclick="removeBookmark(${b.question_id})">Remove</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function removeBookmark(qid) {
+    bookmarks.delete(qid);
+    if (currentUser) {
+      await sb.from('bookmarks').delete()
+        .eq('user_id', currentUser.id)
+        .eq('question_id', qid);
+    }
+    document.getElementById(`bm-${qid}`)?.remove();
+    // Update bookmark btn if this is current question
+    if (currentQuestion?.id === qid) {
+      document.getElementById('bookmarkBtn').classList.remove('bookmarked');
+    }
+  }
+
+  // ── HISTORY ──
   async function loadHistory() {
     if (!currentUser) return;
     const { data, error } = await sb
@@ -664,35 +898,110 @@
       .select('*')
       .eq('user_id', currentUser.id)
       .order('answered_at', { ascending: false })
-      .limit(50);
+      .limit(100);
 
     if (error || !data) {
-      document.getElementById('historyList').innerHTML = '<div class="empty-history"><div class="emoji">⚠️</div><p>Could not load history.<br/>Make sure the database table is created in Supabase.</p></div>';
+      document.getElementById('historyList').innerHTML = '<div class="empty-history"><div class="emoji">⚠️</div><p>Could not load history.<br/>Make sure the database tables are created.</p></div>';
       return;
     }
-    renderHistory(data);
+
+    renderProgressRing(data);
+    renderWeakDomains(data);
     renderBreakdown(data);
+    renderHistory(data.slice(0, 50));
+  }
+
+  function renderProgressRing(data) {
+    const total = data.length;
+    const correct = data.filter(d => d.is_correct).length;
+    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+    const circumference = 207.3;
+    const offset = circumference - (pct / 100) * circumference;
+
+    document.getElementById('ringPct').textContent = pct + '%';
+    document.getElementById('ringTotal').textContent = total;
+    document.getElementById('ringCorrect').textContent = correct;
+    document.getElementById('ringWrong').textContent = total - correct;
+    setTimeout(() => {
+      document.getElementById('ringFill').style.strokeDashoffset = offset;
+    }, 100);
+  }
+
+  function renderWeakDomains(data) {
+    const domainMap = {};
+    data.forEach(item => {
+      if (!domainMap[item.domain]) domainMap[item.domain] = { correct: 0, total: 0 };
+      domainMap[item.domain].total++;
+      if (item.is_correct) domainMap[item.domain].correct++;
+    });
+
+    const sorted = Object.entries(domainMap)
+      .filter(([, s]) => s.total >= 2)
+      .map(([domain, s]) => ({ domain, pct: Math.round((s.correct / s.total) * 100), total: s.total }))
+      .sort((a, b) => a.pct - b.pct)
+      .slice(0, 4);
+
+    const el = document.getElementById('weakDomainList');
+    if (sorted.length === 0) {
+      el.innerHTML = '<div style="font-size:12px;color:var(--muted)">Answer more questions to see weak areas</div>';
+      return;
+    }
+
+    el.innerHTML = sorted.map((item, i) => `
+      <div class="weak-domain">
+        <div class="weak-rank">${i + 1}.</div>
+        <div class="weak-name">${item.domain}</div>
+        <div class="${item.pct < 60 ? 'weak-pct-bad' : 'weak-pct-ok'}">${item.pct}%</div>
+      </div>
+    `).join('');
+  }
+
+  function renderBreakdown(data) {
+    if (data.length === 0) return;
+    document.getElementById('breakdownCard').style.display = 'block';
+
+    const domainMap = {};
+    data.forEach(item => {
+      if (!domainMap[item.domain]) domainMap[item.domain] = { correct: 0, total: 0 };
+      domainMap[item.domain].total++;
+      if (item.is_correct) domainMap[item.domain].correct++;
+    });
+
+    document.getElementById('breakdownRows').innerHTML = Object.entries(domainMap)
+      .sort((a, b) => (b[1].correct / b[1].total) - (a[1].correct / a[1].total))
+      .map(([domain, s]) => {
+        const pct = Math.round((s.correct / s.total) * 100);
+        const color = pct >= 75 ? 'var(--green)' : pct >= 50 ? 'var(--yellow)' : 'var(--red)';
+        return `
+          <div class="breakdown-row">
+            <div class="breakdown-domain">${domain}</div>
+            <div class="breakdown-bar-bg">
+              <div class="breakdown-bar-fill" style="width:${pct}%;background:${color}"></div>
+            </div>
+            <div class="breakdown-pct">${pct}%</div>
+          </div>`;
+      }).join('');
   }
 
   function renderHistory(data) {
     const list = document.getElementById('historyList');
     if (data.length === 0) {
-      list.innerHTML = '<div class="empty-history"><div class="emoji">📭</div><p>No history yet — answer some questions first!</p></div>';
+      list.innerHTML = '<div class="empty-history"><div class="emoji">📭</div><p>No history yet — answer some questions!</p></div>';
       return;
     }
+    const diffLabel = ['', 'Easy', 'Medium', 'Hard'];
     list.innerHTML = data.map(item => {
       const time = new Date(item.answered_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
       const cls = item.is_correct ? 'correct' : 'wrong';
-      const icon = item.is_correct ? '✓' : '✗';
       return `
         <div class="history-item">
-          <div class="history-icon ${cls}">${icon}</div>
+          <div class="history-icon ${cls}">${item.is_correct ? '✓' : '✗'}</div>
           <div class="history-body">
             <div class="history-q">${item.question_text}</div>
             <div class="history-meta">
               <span class="history-badge">${item.subject}</span>
               <span class="history-badge">${item.domain}</span>
-              <span class="history-badge">Diff ${item.difficulty}</span>
+              <span class="history-badge">${diffLabel[item.difficulty] || item.difficulty}</span>
               <span class="history-badge">You: ${item.selected_answer} · Ans: ${item.correct_answer}</span>
             </div>
           </div>
@@ -701,33 +1010,16 @@
     }).join('');
   }
 
-  function renderBreakdown(data) {
-    if (data.length === 0) return;
-    document.getElementById('breakdownCard').style.display = 'block';
-    const domainMap = {};
-    data.forEach(item => {
-      if (!domainMap[item.domain]) domainMap[item.domain] = { correct: 0, total: 0 };
-      domainMap[item.domain].total++;
-      if (item.is_correct) domainMap[item.domain].correct++;
-    });
-    document.getElementById('breakdownRows').innerHTML = Object.entries(domainMap).map(([domain, s]) => {
-      const pct = Math.round((s.correct / s.total) * 100);
-      return `
-        <div class="breakdown-row">
-          <div class="breakdown-domain">${domain}</div>
-          <div class="breakdown-bar-bg"><div class="breakdown-bar-fill" style="width:${pct}%"></div></div>
-          <div class="breakdown-pct">${pct}%</div>
-        </div>`;
-    }).join('');
-  }
-
-  // TABS
+  // ── TABS ──
   function switchTab(tab) {
-    document.getElementById('tabPractice').classList.toggle('active', tab === 'practice');
-    document.getElementById('tabHistory').classList.toggle('active', tab === 'history');
+    ['practice', 'history', 'bookmarks'].forEach(t => {
+      document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('active', t === tab);
+    });
     document.getElementById('practiceView').style.display = tab === 'practice' ? 'flex' : 'none';
     document.getElementById('historyView').style.display = tab === 'history' ? 'block' : 'none';
+    document.getElementById('bookmarksView').style.display = tab === 'bookmarks' ? 'block' : 'none';
     if (tab === 'history') loadHistory();
+    if (tab === 'bookmarks') loadBookmarksView();
   }
 
   document.getElementById('filterSubject').addEventListener('change', loadQuestion);
